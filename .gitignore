@@ -1,3 +1,11 @@
+# IDE
+/.vs
+/.idea
+*.vcxproj**
+
+# Build
+x64
+
 # Prerequisites
 *.d
 
