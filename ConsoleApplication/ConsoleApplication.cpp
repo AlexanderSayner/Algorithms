@@ -157,6 +157,39 @@ public:
         }
         return true;
     }
+    bool isValidBraces(std::string s) {
+        std::vector<char>op = { '(','{','[' };
+        std::vector<char>cl = { ')','}',']' };
+        std::vector<char>stack;
+        for (int i = 0; i < s.length(); i++) {
+            switch (s[i]) {
+            case '(':
+            case '{':
+            case '[':
+                stack.push_back(s[i]);
+                break;
+            case ')':
+                if (stack.size() == 0||stack.back() != op[0]) {
+                    return false;
+                }
+                stack.pop_back();
+                break;
+            case '}':
+                if (stack.size() == 0|| stack.back() != op[1]) {
+                    return false;
+                }
+                stack.pop_back();
+                break;
+            case ']':
+                if (stack.size() == 0|| stack.back() != op[2]) {
+                    return false;
+                }
+                stack.pop_back();
+                break;
+            }
+        }
+        return stack.size()==0;
+    }
 };
 int main()
 {
@@ -172,6 +205,8 @@ int main()
     std::cout << "t: a=" << tmap['a'] << " c=" << tmap['c'] << '\n';
     auto solution = Solution();
     std::cout << "isAnagram " << solution.isAnagram(a, t) << '\n';
+    std::string bracesStr = "]";
+    std::cout <<"Is braces string " << bracesStr << " valid: " << solution.isValidBraces(bracesStr) << '\n';
     //std::cout << "Hello World!\n";
     //std::vector<int> arr = { 5, 0, 1, 2, 3, 4};
     std::vector<int> arr = { 4, 5, 6, 7, 8, 1, 2, 3 };
